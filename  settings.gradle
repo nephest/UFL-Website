@@ -1,0 +1,5 @@
+rootProject.name = 'UFL'
+
+include 'client'
+include 'server'
+include 'commons'
