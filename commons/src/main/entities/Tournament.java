@@ -1,7 +1,6 @@
 package commons.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import commons.models.Rule;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

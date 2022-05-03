@@ -13,29 +13,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
 
-    @Column(name = "name")
-    public string name;
-
-    public User ( string name ) {
-        this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public string getName() {
-        return name;
-    }
-
-    public void setName(string name) {
-        this.name = name;
-    }
-
     public boolean equals(Object object) {
         if (this == object) {
             return true;
@@ -47,11 +24,64 @@ public class User {
             return false;
         }
         User user = (User) object;
-        return id == user.id && name.equals(user.name);
+        return id == user.id && accountName.equals(user.accountName) && displayName.equals(user.displayName) &&
+                bnetId.equals(user.bnetId);
     }
 
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name);
+        return Objects.hash(super.hashCode(), id, accountName, displayName, bnetId);
+    }
+
+    @Column(name = "accountName")
+    public string accountName;
+
+    @Column(name = "displayName")
+    public string displayName;
+
+    @Column(name = "bnet" )
+    public string bnetId;
+
+    public User ( string accountName ) {
+        this.accountName = accountName;
+        this.displayName = accountName;
+    }
+
+    public string getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(string accountName) {
+        this.accountName = accountName;
+    }
+
+    public string getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(string displayName) {
+        this.displayName = displayName;
+    }
+
+    public string getBnetId() {
+        return bnetId;
+    }
+
+    public void setBnetId(string bnetId) {
+        this.bnetId = bnetId;
+    }
+
+    public User (string accountName, string bnetId ) {
+        this.accountName = accountName;
+        this.displayName = accountName;
+        this.bnetId = bnetId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }
