@@ -1,1 +1,4 @@
 .idea/*
+
+src/main/resources/application-private.properties
+src/test/resources/application-private.properties
