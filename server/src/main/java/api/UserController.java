@@ -1,6 +1,6 @@
 package server.api;
 
-import commons.entities.Tournament;
+import commons.entities.User;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import server.database.TournamentRepository;
+import server.database.UserRepository;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -26,11 +26,11 @@ import java.util.Optional;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/api/tournaments")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final Random random;
-    private final TournamentRepository repo;
+    private final UserRepository repo;
 
     /**
      * Constructs a new activity controller object
@@ -52,28 +52,27 @@ public class UserController {
     }
 
     /**
-     * Retrieves all tournaments from the repository and sends them
+     * Retrieves all user from the repository and sends them
      * to the client
      * @return a list of all tournaments in the repository
      */
     @GetMapping(path = { "", "/" })
-    public List<Tournament> getAll() {
+    public List<User> getAll() {
         return repo.findAll();
     }
 
     /**
-     * Saves a tournament sent by the client to the tournament repository
-     * @param tournament the tournament to save
-     * @return the saved tournament entity
+     * Saves a user sent by the client to the user repository
+     * @param user the user to save
+     * @return the saved user entity
      */
     @PostMapping(path = { "", "/" })
-    public ResponseEntity<Tournament> add(@RequestBody Tournament tournament) {
-// || isNullOrEmpty(server) has to be added
-        if (isNullOrEmpty(tournament.title)) {
+    public ResponseEntity<User> add(@RequestBody User user) {
+        if (isNullOrEmpty(user.accountName)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        Tournament saved = repo.save(tournament);
+        User saved = repo.save(user);
         return ResponseEntity.ok(saved);
     }
 
@@ -93,10 +92,10 @@ public class UserController {
     }
 
     /**
-     * Deletes a tournament from the database if a tournament
+     * Deletes a user from the database if a tournament
      * with the given id exists. Otherwise, returns a bad request
-     * @param id the id of the activity to delete
-     * @return the deleted activity if it exists
+     * @param id the id of the user to delete
+     * @return the deleted user if it exists
      */
     @DeleteMapping(path = {"/{id}"})
     public ResponseEntity<Tournament> delete(@PathVariable("id") long id) {

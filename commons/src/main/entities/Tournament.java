@@ -1,6 +1,7 @@
 package commons.entities;
 
-import commons.models.Rule;
+import commons.models.Format;
+import commons.entities.User;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,11 +22,14 @@ public class Tournament {
     @Column(name = "description")
     public string description;
 
-    public Rule rule;
+    public Format format;
 
-    public Tournament ( Rule rule ) {
-        this.rule = rule;
+    public Tournament ( Format format ) {
+        this.format = format;
+        this.admins = new HashList<User>();
     }
+
+    private List<User> admins;
 
     public long getId() {
         return id;
@@ -49,6 +53,10 @@ public class Tournament {
 
     public void setRule(Rule rule) {
         this.rule = rule;
+    }
+
+    public void addAdmin ( User user ) {
+        admins.add ( user );
     }
 
     public boolean equals(Object object) {

@@ -68,7 +68,6 @@ public class TournamentController {
      */
     @PostMapping(path = { "", "/" })
     public ResponseEntity<Tournament> add(@RequestBody Tournament tournament) {
-// || isNullOrEmpty(server) has to be added
         if (isNullOrEmpty(tournament.title)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
@@ -95,8 +94,8 @@ public class TournamentController {
     /**
      * Deletes a tournament from the database if a tournament
      * with the given id exists. Otherwise, returns a bad request
-     * @param id the id of the activity to delete
-     * @return the deleted activity if it exists
+     * @param id the id of the tournament to delete
+     * @return the deleted tournament if it exists
      */
     @DeleteMapping(path = {"/{id}"})
     public ResponseEntity<Tournament> delete(@PathVariable("id") long id) {

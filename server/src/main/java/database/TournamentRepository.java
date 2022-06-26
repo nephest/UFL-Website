@@ -1,6 +1,6 @@
 package server.database;
 
-import commons.entities.Activity;
+import commons.entities.Tournament;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
