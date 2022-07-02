@@ -22,6 +22,8 @@ public class Tournament {
     @Column(name = "description")
     public string description;
 
+    public List<Match> matches;
+    public List<Team> teams;
     public Format format;
 
     public Tournament ( Format format ) {
