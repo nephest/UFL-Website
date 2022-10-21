@@ -4,7 +4,7 @@
 **/*~
 
 # dependencies
-/frontend/node_modules
+/server/frontend/node_modules
 /.pnp
 .pnp.js
 
@@ -13,6 +13,9 @@
 
 # production
 /build
+build/
+static/
+.gradle/
 
 # misc
 .DS_Store

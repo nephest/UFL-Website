@@ -1,0 +1,27 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.12'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id "com.github.node-gradle.node" version "3.5.0"
+}
+
+node {
+    download.set(true)
+    nodeProjectDir = file("${project.projectDir}/frontend")
+    npmInstallCommand = System.getenv("CI") ? 'ci' : 'install'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'com.h2database:h2'
+}
+
+task frontClean(type: Delete) {
+    delete "static"
+}
+
+tasks.clean.finalizedBy("frontClean")
+
+if (!hasProperty('buildProfile')) ext.buildProfile = 'default'
+apply from: "profile-${buildProfile}.gradle"
