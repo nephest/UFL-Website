@@ -1,0 +1,20 @@
+task npmBuild(type: NpmTask) {
+    args = ["run", "build"]
+    environment = ["CI": "true"]
+    dependsOn 'npmInstall'
+}
+
+task npmTest(type: NpmTask) {
+    args = ["run", "test"]
+    environment = ["CI": "true"]
+    dependsOn 'npmInstall'
+}
+
+task copyFrontEndResources(type: Copy) {
+    from(file("${project.projectDir}/frontend/build"))
+    into('static')
+}
+
+tasks.compileJava.finalizedBy('npmBuild')
+tasks.processResources.finalizedBy('copyFrontEndResources')
+tasks.test.finalizedBy("npmTest")
